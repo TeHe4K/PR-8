@@ -20,9 +20,18 @@ namespace PR_8_Konevskii
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<Object> AllItem = Classes.RepoItems.AllItems();
         public MainWindow()
         {
             InitializeComponent();
+            CreateUI();
+        }
+        public void CreateUI()
+        {
+            foreach (object item in AllItem)
+            {
+                parent.Children.Add(new Elements.Item(item));
+            }
         }
     }
 }
