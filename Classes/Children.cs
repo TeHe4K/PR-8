@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace PR_8_Konevskii.Classes
 {
-    public class Sport:Shop
+    public class Children :Shop
     {
-        public string Size {  get; set; }
-        public Sport(string Name, int Price, string Size) : base(Name,Price) 
+        public int Age { get; set; }
+        public Children(string Name, int Price, int Age): base(Name, Price) 
         {
-            this.Size = Size;
+            this.Age = Age;
         }
     }
 }
