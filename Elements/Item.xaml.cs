@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PR_8_Konevskii.Classes;
 
 namespace PR_8_Konevskii.Elements
 {
@@ -35,6 +36,11 @@ namespace PR_8_Konevskii.Elements
             {
                 Classes.Sport SportData = ItemData as Classes.Sport;
                 tb_Characteristic.Content = "Размер: " + SportData.Size;
+            }
+            if (ItemData is Classes.Electronics)
+            {
+                Classes.Electronics ElectronicsData = ItemData as Classes.Electronics;
+                tb_Characteristic.Content = $"Ёмкость аккумулятора: {ElectronicsData.BatteryCapacity} \nСкорость езды: {ElectronicsData.DrivingSpeed}";
             }
         }
     }

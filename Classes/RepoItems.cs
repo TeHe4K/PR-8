@@ -11,6 +11,9 @@ namespace PR_8_Konevskii.Classes
         public static List<object> AllItems()
         {
             List<object> allItems = new List<object>();
+            allItems.Add(new Electronics("Электроника 1",800 , 6578, 15));
+            allItems.Add(new Electronics("Электроника 2",1500 , 4675, 10));
+            allItems.Add(new Electronics("Электроника 3",2500 , 8764, 20));
             allItems.Add(new Children("Игрушка интерактивная", 2200, 3));
             allItems.Add(new Children("Кактус танцующий", 894, 6));
             allItems.Add(new Children("Мягкая игрушка кошка подушка", 1724, 6));
