@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PR_8_Konevskii.Classes
+namespace PR_8_Konevskii.Models
 {
     public class Shop
     {

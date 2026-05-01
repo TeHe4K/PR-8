@@ -70,6 +70,8 @@
     </Compile>
     <Compile Include="Classes\ChildrenContext.cs" />
     <Compile Include="Classes\Common\DBCConnection.cs" />
+    <Compile Include="Classes\SportContext.cs" />
+    <Compile Include="Classes\ElectronicContext.cs" />
     <Compile Include="Interfaces\IContext.cs" />
     <Compile Include="Models\Children.cs" />
     <Compile Include="Models\Electronics.cs" />
