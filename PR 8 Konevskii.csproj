@@ -68,6 +68,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Classes\ChildrenContext.cs" />
     <Compile Include="Classes\Common\DBCConnection.cs" />
     <Compile Include="Interfaces\IContext.cs" />
     <Compile Include="Models\Children.cs" />
