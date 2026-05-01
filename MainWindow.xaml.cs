@@ -20,7 +20,7 @@ namespace PR_8_Konevskii
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<Object> AllItem = Classes.RepoItems.AllItems();
+        List<Object> AllItem = Classes.ShopContext.AllItems();
         public MainWindow()
         {
             InitializeComponent();
