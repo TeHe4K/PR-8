@@ -8,24 +8,31 @@ using System.Threading.Tasks;
 
 namespace PR_8_Konevskii.Classes
 {
-    public class ChildrenContext: Children, IContext
+    public class ChildrenContext : Models.Children, IContext
     {
         public ChildrenContext() { }
-        public ChildrenContext(int Id, string Name, int Price, int Age, int IdShop) { }
+        public ChildrenContext(int Id, string Name, int Price, int Age, int IdShop) : base(Name, Price, Age, IdShop)
+        {
+            id = Id;
+        }
         public List<object> All()
         {
             List<object> allShop = new ShopContext().All();
-            List<object allChildren = new List<object>();
+            List<object> allChildren = new List<object>();
 
             OleDbConnection connection = Common.DBCConnection.Connection();
-            OleDbDataReader childrenData = Common.DBCConnection.Select("SELECT * FROM [Детские вещи]", connection);
+            OleDbDataReader childrenData = Common.DBCConnection.Query("SELECT * FROM [Детские вещи]", connection);
 
             while (childrenData.Read())
             {
                 ShopContext shopElement = allShop.Find(
                     x => (x as ShopContext).id == childrenData.GetInt32(2)) as ShopContext;
+                if (shopElement == null)
+                {
+                    continue;
+                }
                 ChildrenContext newChildren = new ChildrenContext(
-                    shopElement.Id,
+                    shopElement.id,
                     shopElement.Name,
                     shopElement.Price,
                     childrenData.GetInt32(1),
@@ -40,7 +47,10 @@ namespace PR_8_Konevskii.Classes
         {
             throw new NotImplementedException();
         }
-        public void Delete() { throw new NotImplementedException();
+        public void Delete()
+        {
+            throw new NotImplementedException();
 
+        }
     }
 }

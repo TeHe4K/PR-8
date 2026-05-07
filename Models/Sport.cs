@@ -9,12 +9,12 @@ namespace PR_8_Konevskii.Models
     public class Sport:Shop
     {
         public string Size {  get; set; }
-        public int Id { get; set; }
+        public int IdShop { get; set; }
         public Sport() { }
-        public Sport(string Name, int Price, string Size, int Id) : base(Name,Price) 
+        public Sport(string Name, int Price, string Size, int IdShop) : base(Name,Price) 
         {
             this.Size = Size;
-            this.Id = Id;
+            this.IdShop = IdShop;
         }
     }
 }

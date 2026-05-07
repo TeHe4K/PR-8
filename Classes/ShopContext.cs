@@ -8,10 +8,13 @@ using System.Threading.Tasks;
 
 namespace PR_8_Konevskii.Classes
 {
-    public class ShopContext: Shop, IContext
+    public class ShopContext: Models.Shop, IContext
     {
         public ShopContext() { }
-        public ShopContext(int Id, string Name, int Price): base(Id,Name,Price { }
+        public ShopContext(int Id, string Name, int Price): base(Name,Price)
+        {
+            id = Id;
+        }
         public List<object> All() 
         {
             List<Object> allShop = new List<object>();
@@ -20,10 +23,12 @@ namespace PR_8_Konevskii.Classes
             OleDbDataReader shopData = Common.DBCConnection.Query("SELECT * FROM [Товар]", connection);
             while (shopData.Read())
             {
-                ShopContext newShop = new ShopContext();
-                shopData.GetInt32(0);
-                shopData.GetString(1);
-                shopData.GetInt32(2);
+                ShopContext newShop = new ShopContext(
+                    shopData.GetInt32(0),
+                    shopData.GetString(1),
+                    shopData.GetInt32(2)
+                    );
+                allShop.Add(newShop);
             };
             Common.DBCConnection.CloseConnection(connection);
             return allShop;

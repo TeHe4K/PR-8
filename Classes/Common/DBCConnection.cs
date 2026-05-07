@@ -9,10 +9,10 @@ namespace PR_8_Konevskii.Classes.Common
 {
     public class DBCConnection
     {
-        public static readonly string Path = @"";
+        public static readonly string Path = @"D:\Shop.accdb";
         public static OleDbConnection Connection()
         {
-            OleDbConnection oleDbConnection = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0; Data Source" + Path);
+            OleDbConnection oleDbConnection = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0; Data Source=" + Path);
             oleDbConnection.Open();
             return oleDbConnection;
         }

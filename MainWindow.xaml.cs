@@ -20,11 +20,18 @@ namespace PR_8_Konevskii
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<Object> AllItem = new Classes.ChildrenContext().All();
+        List<Object> AllItem = new List<object>();
         public MainWindow()
         {
             InitializeComponent();
+            LoadItems();
             CreateUI();
+        }
+        public void LoadItems()
+        {
+            AllItem.AddRange(new Classes.ChildrenContext().All());
+            AllItem.AddRange(new Classes.SportContext().All());
+            AllItem.AddRange(new Classes.ElectronicContext().All());
         }
         public void CreateUI()
         {

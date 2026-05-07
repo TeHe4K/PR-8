@@ -8,31 +8,49 @@ using System.Threading.Tasks;
 
 namespace PR_8_Konevskii.Classes
 {
-    public class ElectronicContext: Electronics, IContext
+    public class ElectronicContext : Models.Electronics, IContext
     {
         public ElectronicContext() { }
-        public ElectronicContext(int Id, string Name, int Price, int BatteryCapacity, int DrivingSpeed) : base(Name, Price, BatteryCapacity, DrivingSpeed, Id) { }
+        public ElectronicContext(int Id, string Name, int Price, int BatteryCapacity, int DrivingSpeed, int IdShop) : base(Name, Price, BatteryCapacity, DrivingSpeed, IdShop)
+        {
+            id = Id;
+        }
         public List<object> All()
         {
             List<object> allShop = new ShopContext().All();
             List<object> allElectronics = new List<object>();
             OleDbConnection connection = Common.DBCConnection.Connection();
-            OleDbDataReader electronicsData = Common.DBCConnection.Select("SELECT * FROM [Электроника]", connection);
-
-            while (electronicsData.Read())
+            try
             {
-                ShopContext shopElement = allShop.Find(
-                    x => (x as ShopContext).id == electronicsData.GetInt32(2)) as ShopContext;
-                ElectronicContext newElectronic = new ElectronicContext(
-                    shopElement.Id,
-                    shopElement.Name,
-                    shopElement.Price,
-                    electronicsData.GetInt32(1),
-                    electronicsData.GetInt32(2)
-                    );
-                newElectronic.Add(newElectronic);
+                OleDbDataReader electronicsData = Common.DBCConnection.Query("SELECT * FROM [Электроника]", connection);
+
+                while (electronicsData.Read())
+                {
+                    ShopContext shopElement = allShop.Find(
+                        x => (x as ShopContext).id == electronicsData.GetInt32(3)) as ShopContext;
+                    if (shopElement == null)
+                    {
+                        continue;
+                    }
+                    ElectronicContext newElectronic = new ElectronicContext(
+                        shopElement.id,
+                        shopElement.Name,
+                        shopElement.Price,
+                        electronicsData.GetInt32(1),
+                        electronicsData.GetInt32(2),
+                        electronicsData.GetInt32(3)
+                        );
+                    allElectronics.Add(newElectronic);
+                }
             }
-            Common.DBCConnection.CloseConnection(connection);
+            catch (OleDbException)
+            {
+                return allElectronics;
+            }
+            finally
+            {
+                Common.DBCConnection.CloseConnection(connection);
+            }
             return allElectronics;
         }
         public void Save(bool Update = false)
@@ -43,4 +61,5 @@ namespace PR_8_Konevskii.Classes
         {
             throw new NotImplementedException();
         }
+    }
 }
